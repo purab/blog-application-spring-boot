@@ -11,9 +11,9 @@ import java.util.Collection;
 @Entity
 @Table(name = "users")
 @Data
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -40,7 +40,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    @OneToMany(mappedBy = "user")
-    private Collection<Post> posts;
+   /* @OneToMany(mappedBy = "user")
+    private Collection<Post> posts;*/
+
 
 }
