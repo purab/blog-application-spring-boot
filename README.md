@@ -17,7 +17,7 @@ This project has following functionality
 
 ![Post Posts](https://github.com/purab/blog-application-spring-boot/blob/master/images/blog03.PNG)
 
-![Post Posts](https://github.com/purab/blog-application-spring-boot/blob/master/images/blog04.PNG)
+![Post Posts](https://github.com/purab/blog-application-spring-boot/blob/master/images/blog4.PNG)
 
 ![Post Posts](https://github.com/purab/blog-application-spring-boot/blob/master/images/blog05.PNG)
 
