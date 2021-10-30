@@ -11,11 +11,20 @@
 
     <div class="card-body">
       <h5 class="card-title" th:text="${post.title}">Title</h5>
-      <span class="badge bg-primary ">Posted on 13 Feb, 2021</span>
+      <span class="badge bg-primary" th:text="'Created: ' + ${#dates.format(post.createDate, 'dd-MMM-yyyy')} + ' by '">Posted on 13 Feb, 2021</span>
       <span class="badge bg-danger"><a th:text="${post.user.username}" th:href="@{'/blog/' + ${post.user.username}}">User</a></span>
       <div class="border-bottom mt-3"></div>
       <img src="https://images.moneycontrol.com/static-mcnews/2020/04/stock-in-the-news-770x433.jpg" class="img-fluid mb-2 mt-2" alt="Responsive image">
       <p class="card-text" th:text="${post.body}" >Body </p>
+      <!--Only show these buttons if the user is the owner of post-->
+      <div sec:authorize="isAuthenticated()" th:if="${username}">
+        <div class="row">
+          <a th:href="@{'/editPost/{id}'(id=${post.id})}" class="col-md-2">
+            <button type="button" class="btn btn-primary btn-block" th:text="Edit">Edit</button>
+          </a>
+
+        </div>
+      </div>
       <a href="#" class="btn btn-primary">Share this post</a>
       <a href="#" class="btn btn-primary">Comment on this</a>
 

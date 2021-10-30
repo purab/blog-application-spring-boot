@@ -17,7 +17,7 @@
                     <h5 class="card-title" th:text="${post.title}">tt</h5>
                     </a>
                     <p class="card-text" th:text="${post.body}">body</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text"><small class="text-muted" th:text="'Created: ' + ${#dates.format(post.createDate, 'dd-MMM-yyyy')} + ' by '">Last updated 3 mins ago</small></p>
                 </div>
             </div>
         </div>
@@ -29,20 +29,20 @@
                 <span class="page-link" >Total Rows: [[${totalItems}]]</span>
             </li>
             <li class="page-item">
-                <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+                <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/posts/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
                 <span class="page-link" th:unless="${currentPage > 1}">Previous</span>
             </li>
             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                <li class="page-item"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a></li>
+                <li class="page-item"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/posts/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a></li>
 				<span class="page-link" th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 			</span>
 
             <li class="page-item">
-                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/posts/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
                 <span class="page-link" th:unless="${currentPage < totalPages}">Next</span>
             </li>
             <li class="page-item">
-                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/posts/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
                 <span class="page-link" th:unless="${currentPage < totalPages}">Last</span>
             </li>
         </ul>
