@@ -11,3 +11,4 @@ This project has following functionality
 8. Admin Login
 9. User registration
 10. User Role management
+    ![Post Posts](https://github.com/purab/blog-application-spring-boot/blob/master/images/blog01.PNG)
