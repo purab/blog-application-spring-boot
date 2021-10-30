@@ -6,13 +6,14 @@ import in.purabtech.repository.PostRepository;
 import in.purabtech.repository.RoleRepository;
 import in.purabtech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -29,7 +30,10 @@ public class AdminController {
     RoleRepository roleRepository;
 
     @Autowired
-    public BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -59,7 +63,7 @@ public class AdminController {
             // Registration successful, save user
             // Set user role to USER and set it as active
             String password = user.getPassword();
-            user.setPassword(bCryptPasswordEncoder.encode(password));
+            user.setPassword(passwordEncoder().encode(password));
             user.setEnabled(true);
             List<Role> roles= new ArrayList<>();
             roles.add(roleRepository.findById(2L).get()); //SET USER ROLE
@@ -67,11 +71,11 @@ public class AdminController {
             userService.save(user);
 
             //auto login
-            request.login(user.getEmail(),password);
-            return "redirect:/";
+            /*request.login(user.getEmail(),password);
+            return "redirect:/";*/
 
-           // model.addAttribute("successMessage", "User has been registered successfully");
-            //model.addAttribute("user", new User());
+            model.addAttribute("successMessage", "User has been registered successfully");
+            model.addAttribute("user", new User());
         }
 
         return "/registration";

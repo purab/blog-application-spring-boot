@@ -84,27 +84,27 @@ VALUES (12, 3, 'Title 12',
         CURRENT_TIMESTAMP());
 
 -- Comments
-INSERT INTO COMMENTS (post_id, user_id, body, create_date)
-VALUES (1, 1,
+INSERT INTO COMMENTS (comment_id, post_id, user_id, body, create_date)
+VALUES (1,1, 1,
         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
         CURRENT_TIMESTAMP());
-INSERT INTO COMMENTS (post_id, user_id, body, create_date)
-VALUES (1, 2,
+INSERT INTO COMMENTS (comment_id,post_id, user_id, body, create_date)
+VALUES (2,1, 2,
         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
         CURRENT_TIMESTAMP());
-INSERT INTO COMMENTS (post_id, user_id, body, create_date)
-VALUES (1, 3,
+INSERT INTO COMMENTS (comment_id,post_id, user_id, body, create_date)
+VALUES (3, 1, 3,
         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
         CURRENT_TIMESTAMP());
-INSERT INTO COMMENTS (post_id, user_id, body, create_date)
-VALUES (6, 1,
+INSERT INTO COMMENTS (comment_id,post_id, user_id, body, create_date)
+VALUES (4, 6, 1,
         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
         CURRENT_TIMESTAMP());
-INSERT INTO COMMENTS (post_id, user_id, body, create_date)
-VALUES (6, 2,
+INSERT INTO COMMENTS (comment_id,post_id, user_id, body, create_date)
+VALUES (5,6, 2,
         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
         CURRENT_TIMESTAMP());
-INSERT INTO COMMENTS (post_id, user_id, body, create_date)
-VALUES (6, 3,
+INSERT INTO COMMENTS (comment_id,post_id, user_id, body, create_date)
+VALUES (6,6, 3,
         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
         CURRENT_TIMESTAMP());

@@ -30,9 +30,9 @@ public class PostController {
     public String newPost(Principal principal,
                           Model model) {
 
-        String uname ="user";
-        //Optional<User> user = userService.findByUsername(principal.getName());
-        Optional<User> user = userService.findByUsername(uname);
+        //String uname ="user";
+        Optional<User> user = userService.findByUsername(principal.getName());
+        //Optional<User> user = userService.findByUsername(uname);
 
         if (user.isPresent()) {
             Post post = new Post();

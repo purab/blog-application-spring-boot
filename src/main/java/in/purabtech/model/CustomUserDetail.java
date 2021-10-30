@@ -8,16 +8,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CustomUserDetail extends User implements UserDetails {
+public class CustomUserDetail implements UserDetails {
+
+    private User user;
+
     public CustomUserDetail(User user) {
-        super(user);
+        super();
+        this.user = user;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        super.getRoles().forEach(role -> {
+        user.getRoles().forEach(role -> {
             authorityList.add(new SimpleGrantedAuthority(role.getName()));
         });
 
@@ -26,12 +30,12 @@ public class CustomUserDetail extends User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return super.getEmail();
+        return user.getUsername();
     }
 
     @Override
     public String getPassword() {
-        return super.getPassword();
+        return user.getPassword();
     }
 
     @Override

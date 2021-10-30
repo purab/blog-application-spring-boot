@@ -1,20 +1,35 @@
 package in.purabtech.configuration;
 
-import in.purabtech.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import in.purabtech.service.CustomUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Configuration
+@EnableWebMvc
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserService userService;
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new CustomUserService();
+    }
 
     /**
      * HTTPSecurity configurer
@@ -37,25 +52,49 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .defaultSuccessUrl("/home")
                     .permitAll()
-                    .usernameParameter("username")
-                    .passwordParameter("password")
                 .and()
                 .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
                 .permitAll()
                 // Fix for H2 console
                 .and().headers().frameOptions().disable();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setUserDetailsService(userDetailsService());
+        return authProvider;
     }
 
-    /**
-     * Configure and return BCrypt password encoder
-     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //DB
+        auth.authenticationProvider(authenticationProvider());
+
+        //in memory
+        auth.userDetailsService(inMemoryUserDetailsManager());
+    }
+
+
+
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    public InMemoryUserDetailsManager inMemoryUserDetailsManager()
+    {
+        List<UserDetails> userDetailsList = new ArrayList<>();
+        userDetailsList.add(User.withUsername("admin").password(passwordEncoder().encode("password"))
+                .roles("EMPLOYEE", "USER").build());
+        userDetailsList.add(User.withUsername("manager").password(passwordEncoder().encode("password"))
+                .roles("MANAGER", "USER").build());
+
+        return new InMemoryUserDetailsManager(userDetailsList);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder()
+    {
         return new BCryptPasswordEncoder();
     }
 
